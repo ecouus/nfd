@@ -18,12 +18,15 @@ No Fraud / Node Forward Bot
 3. 从[@username_to_id_bot](https://t.me/username_to_id_bot)获取你的用户id
 4. 登录[cloudflare](https://workers.cloudflare.com/)，创建一个worker
 5. 配置worker的变量
-    - 增加一个`ENV_BOT_TOKEN`变量，数值为从步骤1中获得的token
-    - 增加一个`ENV_BOT_SECRET`变量，数值为从步骤2中获得的secret
-    - 增加一个`ENV_ADMIN_UID`变量，数值为从步骤3中获得的用户id
-6. 绑定kv数据库，创建一个Namespace Name为`nfd`的kv数据库，在setting -> variable中设置`KV Namespace Bindings`：nfd -> nfd
-7. 点击`Quick Edit`，复制[这个文件](./worker.js)到编辑器中
-8. 通过打开`https://xxx.workers.dev/registerWebhook`来注册websoket
+Variables and Secrets-Variables and Secrets-ADD  
+    - 增加一个`ENV_BOT_TOKEN`变量(类型为文本)，数值为从步骤1中获得的token
+    - 增加一个`ENV_BOT_SECRET`变量(类型为文本)，数值为从步骤2中获得的secret
+    - 增加一个`ENV_ADMIN_UID`变量(类型为文本)，数值为从步骤3中获得的用户id
+
+7. Workers&pages -> KV 创建一个名为`nfd`的kv空间
+8. 绑定kv数据库，在Variables and Secret -> bindings创建类型为KV namespace的空间，Name和Value均填写`nfd`
+9. 点击`Quick Edit`，复制[这个文件](./worker.js)到编辑器中
+10. 通过打开`https://xxx.workers.dev/registerWebhook`来注册websoket
 
 ## 使用方法
 - 当其他用户给bot发消息，会被转发到bot创建者
