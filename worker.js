@@ -115,7 +115,7 @@ async function onMessage (message) {
       let guestChantId = await nfd.get('msg-map-' + message?.reply_to_message.message_id, { type: "json" })
       return sendMessage({
         chat_id: ADMIN_UID,
-        text: `打开用户聊天: tg://user?id=${guestChantId}`
+        text: `用户聊天页: tg://user?id=${guestChantId}`
       })
     }
     if(/^\/block$/.exec(message.text)){
