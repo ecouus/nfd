@@ -5,8 +5,8 @@ const ADMIN_UID = ENV_ADMIN_UID // your user id, get it from https://t.me/userna
 
 const NOTIFY_INTERVAL = 3600 * 1000;
 const fraudDb = 'https://raw.githubusercontent.com/LloydAsp/nfd/main/data/fraud.db';
-const notificationUrl = 'https://raw.githubusercontent.com/LloydAsp/nfd/main/data/notification.txt'
-const startMsgUrl = 'https://raw.githubusercontent.com/LloydAsp/nfd/main/data/startMessage.md';
+const notificationUrl = 'https://raw.githubusercontent.com/ecouus/nfd/refs/heads/main/data/notification.txt'
+const startMsgUrl = 'https://raw.githubusercontent.com/ecouus/nfd/refs/heads/main/data/startMessage.md';
 
 const enable_notification = true
 /**
@@ -107,7 +107,15 @@ async function onMessage (message) {
     if(!message?.reply_to_message?.chat){
       return sendMessage({
         chat_id:ADMIN_UID,
-        text:'使用方法，回复转发的消息，并发送回复消息，或者`/block`、`/unblock`、`/checkblock`等指令'
+        text:'使用方法，回复转发的消息，并发送回复消息，或者`/block`、`/unblock`、`/checkblock`、`/info`等指令'
+      })
+    }
+    // 添加 /info 命令处理
+    if(message.text === '/info'){
+      let guestChantId = await nfd.get('msg-map-' + message?.reply_to_message.message_id, { type: "json" })
+      return sendMessage({
+        chat_id: ADMIN_UID,
+        text: `打开用户聊天: tg://user?id=${guestChantId}`
       })
     }
     if(/^\/block$/.exec(message.text)){
